@@ -1,6 +1,6 @@
-import { mkdir, stat } from 'node:fs/promises';
+import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { isAbsolute, join, basename } from 'node:path';
-import { helpText, resolveOptions } from './config.js';
+import { defaultConfig, helpText, resolveOptions } from './config.js';
 import { renderReport } from './report.js';
 import { isTuiEligible, runTui } from './tui.js';
 import { ScanError } from './errors.js';
@@ -45,6 +45,22 @@ export async function main(
   }
   if (help) {
     print(helpText());
+    return 0;
+  }
+
+  if (opts.initConfig) {
+    const target = isAbsolute(opts.config) ? opts.config : join(cwd, opts.config);
+    try {
+      await writeFile(target, `${JSON.stringify(defaultConfig(), null, 2)}\n`, { flag: 'wx' });
+    } catch (e) {
+      if (e.code === 'EEXIST') {
+        errPrint(`Error: ${target} already exists; edit it in place or remove it first.`);
+        return 2;
+      }
+      errPrint(`Error: cannot write ${target}: ${e.message}`);
+      return 2;
+    }
+    print(`Wrote ${target}`);
     return 0;
   }
 

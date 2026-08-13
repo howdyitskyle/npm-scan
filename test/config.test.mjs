@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { parseArgs, resolveOptions, ttlFor, FORMATS } from '../src/config.js';
+import { parseArgs, resolveOptions, ttlFor, FORMATS, defaultConfig } from '../src/config.js';
 
 async function tempDir() {
   return mkdtemp(join(tmpdir(), 'npm-scan-config-'));
@@ -124,4 +124,20 @@ test('resolveOptions: invalid retries/timeout/backoff rejected', () => {
 
 test('FORMATS includes all output formats', () => {
   assert.deepEqual(FORMATS, ['pretty', 'compact', 'markdown', 'json', 'sarif', 'gh-annotations']);
+});
+
+test('parseArgs: --init-config flag', () => {
+  const { flags, errors } = parseArgs(['--init-config']);
+  assert.equal(errors.length, 0);
+  assert.equal(flags.initConfig, true);
+});
+
+test('defaultConfig: returns a safe, documented template', () => {
+  const cfg = defaultConfig();
+  assert.equal(cfg.format, 'pretty');
+  assert.deepEqual(cfg.sources, ['keyv', 'shai-hulud', 'axios', 'teampcp', 'osv']);
+  assert.equal(cfg.excludePkg, null);
+  assert.equal(cfg.iocs, false);
+  assert.equal(cfg.backoffMs, 1000);
+  assert.deepEqual(cfg.ttl, { default: 24, keyv: 1 });
 });

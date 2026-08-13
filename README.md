@@ -219,7 +219,8 @@ off with `--no-tui`. Machine-readable formats (`json`, `sarif`, `markdown`,
 ## Configuration
 
 `.npmscanrc.json` in the project directory is merged with CLI flags (flags
-win). All keys mirror the CLI options:
+win). Generate a starter config with `npm-scan --init-config`, or copy
+`.npmscanrc.json.example`. All keys mirror the CLI options:
 
 ```json
 {
@@ -293,6 +294,7 @@ npm-scan [options]
                         or refresh it when combined with --osv-offline
   --no-tui              Disable the interactive progress UI (spinner/loading dots)
   --config <path>       Config file (default: .npmscanrc.json)
+  --init-config         Write a .npmscanrc.json with default options and exit
   --retries <n>         HTTP retries per fetch (default: 3)
   --timeout-ms <ms>     HTTP timeout per attempt (default: 30000)
   --backoff-ms <ms>     Initial retry backoff (default: 1000)

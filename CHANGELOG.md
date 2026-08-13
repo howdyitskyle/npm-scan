@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `--init-config`: writes a `.npmscanrc.json` (or the `--config` path) pre-filled
+  with default options and exits, refusing to overwrite an existing file.
+
 ### Changed
 
 - Pretty report: the `Recommended actions` section now has the same blank line
