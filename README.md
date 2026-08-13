@@ -14,6 +14,43 @@ known malicious npm packages, and reports anything it finds with rich detail
 — including whether the package is a direct or transitive dependency and
 which of your direct dependencies pulled it in.
 
+## Contents
+
+- [Features](#features)
+- [Quick start](#quick-start)
+- [Sources](#sources)
+- [Output](#output)
+- [Installed packages (`--iocs`)](#installed-packages---iocs)
+- [Offline mode](#offline-mode)
+- [Excluding false positives (`--exclude-pkg`)](#excluding-known-false-positives---exclude-pkg)
+- [GitHub Actions](#github-actions)
+- [Interactive progress UI](#interactive-progress-ui)
+- [Exit codes](#exit-codes)
+- [Configuration](#configuration)
+- [CI / pre-commit](#ci--pre-commit)
+- [Options](#options)
+- [How npm-scan compares](#how-npm-scan-compares)
+- [Development](#development)
+
+## Features
+
+- **Malware-only signal** — a non-zero exit code means *compromised*, not "has
+  an old dependency", so it is safe to gate merges and pre-commit hooks on.
+- **All major lockfiles** — `package-lock.json` (v1/v2/v3), `yarn.lock` (v1),
+  `pnpm-lock.yaml` (v9), and `bun.lock`.
+- **Five threat feeds** — DataDog keyv / Shai-Hulud / axios / TeamPCP campaign
+  CSVs plus OSV `MAL-*` and malicious `GHSA-*` advisories, all enabled by
+  default.
+- **Direct/transitive attribution** — reports which of your direct dependencies
+  pulled in a flagged package.
+- **Fully offline capable** — `--no-osv` (CSV only) or a downloaded OSV database
+  (`--osv-offline` / `--download-osv-db`).
+- **Custom feeds** — bring your own indicator CSV (`--csv`, schema auto-detected).
+- **Installed-package sweep** — `--iocs` also checks `node_modules` on disk.
+- **CI-ready output** — interactive TUI plus compact, markdown, JSON, SARIF, and
+  GitHub annotations (`gh-annotations`).
+- **False-positive control** — `--exclude-pkg` drops known-good packages.
+
 ## Quick start
 
 ```sh
@@ -225,8 +262,9 @@ flags the source as stale in the report.
 GitHub Actions workflow at `.github/workflows/scan.yml` runs the test suite,
 scans with `pretty`, `sarif`, and `gh-annotations` output, uploads SARIF to
 code scanning, and runs a daily feed-integrity smoke test. A local pre-commit
-hook at `.pre-commit-config.yaml` runs `npx --yes @howdyitskyle/npm-scan --no-osv --format compact` on
-lock file changes.
+hook at `.pre-commit-config.yaml` runs
+`npx --yes @howdyitskyle/npm-scan --no-osv --format compact` on lock file
+changes.
 
 ## Options
 
