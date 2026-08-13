@@ -1,6 +1,6 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, writeFile, rm, mkdir } from 'node:fs/promises';
+import { mkdtemp, writeFile, rm, mkdir, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { main } from '../src/cli.js';
@@ -601,6 +601,26 @@ test('e2e: --osv-offline without a downloaded db exits 2 with guidance', async (
 test('e2e: --osv-offline conflicts with --no-osv', async () => {
   const code = await run(['--osv-offline', '--no-osv', '--cache-dir', cacheDir, '--retries', '0']);
   assert.equal(code, 2);
+});
+
+test('e2e: --init-config writes a config file and refuses to overwrite', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'npm-scan-init-'));
+  try {
+    const out = capture();
+    const code = await main(['--init-config', '--cache-dir', cacheDir], { stdout: out, stderr: capture(), cwd: root });
+    assert.equal(code, 0);
+    assert.match(out.text, /Wrote .*\.npmscanrc\.json/);
+    const cfg = JSON.parse(await readFile(join(root, '.npmscanrc.json'), 'utf8'));
+    assert.equal(cfg.format, 'pretty');
+    assert.equal(cfg.excludePkg, null);
+
+    const err = capture();
+    const code2 = await main(['--init-config', '--cache-dir', cacheDir], { stdout: capture(), stderr: err, cwd: root });
+    assert.equal(code2, 2);
+    assert.match(err.text, /already exists/);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
 });
 
 test('e2e: advisory details cached between runs', async () => {

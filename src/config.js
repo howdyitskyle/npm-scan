@@ -25,8 +25,26 @@ export function defaultOptions() {
     iocsRoots: null,
     osvOffline: false,
     downloadOsvDb: false,
+    initConfig: false,
     help: false,
     version: false,
+  };
+}
+
+export function defaultConfig() {
+  return {
+    format: 'pretty',
+    sources: ['keyv', 'shai-hulud', 'axios', 'teampcp', 'osv'],
+    osv: true,
+    osvOffline: false,
+    excludePkg: null,
+    iocs: false,
+    iocsRoots: '.',
+    ttl: { default: 24, keyv: 1 },
+    cacheDir: '.cache/npm-scan',
+    retries: 3,
+    timeoutMs: 30000,
+    backoffMs: 1000,
   };
 }
 
@@ -175,6 +193,9 @@ export function parseArgs(argv) {
       case '--download-osv-db':
         flags.downloadOsvDb = true;
         break;
+      case '--init-config':
+        flags.initConfig = true;
+        break;
       case '--version':
         flags.version = true;
         break;
@@ -278,6 +299,7 @@ Options:
                         or refresh it when combined with --osv-offline
   --no-tui              Disable the interactive progress UI (spinner/loading dots)
   --config <path>       Config file (default: .npmscanrc.json)
+  --init-config         Write a .npmscanrc.json with default options and exit
   --retries <n>         HTTP retries per fetch (default: 3)
   --timeout-ms <ms>     HTTP timeout per attempt (default: 30000)
   --backoff-ms <ms>     Initial retry backoff (default: 1000)
