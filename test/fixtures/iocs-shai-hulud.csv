@@ -1,0 +1,4 @@
+package_name,package_versions,sources
+keyv,6.0.0,camouflage_supply_chain
+@accordproject/concerto-analysis,3.24.1,camouflage_supply_chain
+lodash,4.17.21,research

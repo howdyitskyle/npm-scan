@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "npm-scan",
+          "version": "1.2.0",
+          "informationUri": "https://github.com/kyle/npm-scan",
+          "rules": [
+            {
+              "id": "npm-scan/malicious-package",
+              "name": "MaliciousNpmPackage",
+              "shortDescription": {
+                "text": "Locked dependency matches a known malicious npm indicator."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://osv.dev"
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "npm-scan/malicious-package",
+          "level": "error",
+          "message": {
+            "text": "keyv@6.0.0 is a known malicious npm package (advisories: MAL-2026-11524)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/lockfiles/malicious-direct/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "name": "keyv",
+            "version": "6.0.0",
+            "direct": true,
+            "via": [],
+            "sources": [
+              "DataDog keyv-campaign"
+            ],
+            "osv": [
+              "MAL-2026-11524"
+            ],
+            "advisories": [
+              {
+                "id": "MAL-2026-11524",
+                "summary": "Malicious code in keyv (npm)",
+                "severity": null,
+                "patched": null
+              }
+            ]
+          }
+        }
+      ],
+      "invocation": {
+        "executionSuccessful": true,
+        "endTimeUtc": "2026-08-06T20:35:04.594Z",
+        "properties": {
+          "staleSources": 0
+        }
+      }
+    }
+  ]
+}
+

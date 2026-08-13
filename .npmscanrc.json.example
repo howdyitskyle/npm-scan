@@ -1,0 +1,14 @@
+{
+  "format": "pretty",
+  "sources": ["keyv", "shai-hulud", "axios", "teampcp", "osv"],
+  "osv": true,
+  "osvOffline": false,
+  "excludePkg": "exclude.txt",
+  "iocs": false,
+  "iocsRoots": ".",
+  "ttl": { "default": 24, "keyv": 1 },
+  "cacheDir": ".cache/npm-scan",
+  "retries": 3,
+  "timeoutMs": 30000,
+  "backoffMs": 500
+}

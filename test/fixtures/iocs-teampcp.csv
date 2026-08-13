@@ -1,0 +1,4 @@
+artifact_type,name,affected_versions
+npm package,keyv,"6.0.0, 5.2.3"
+npm package,axios,"1.14.1"
+npm package,lodash,"4.17.21"

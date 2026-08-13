@@ -1,0 +1,6 @@
+ecosystem,package,versions
+npm,keyv,6.0.0|5.2.3
+npm,@accordproject/concerto-analysis,3.24.1
+npm,@emilgroup/accounting-sdk,1.27.3
+npm,lodash,4.17.21
+npm,@scope/foo,1.0.0|2.0.0

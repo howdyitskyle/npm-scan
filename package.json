@@ -1,0 +1,55 @@
+{
+  "name": "npm-scan",
+  "version": "1.2.0",
+  "description": "Scan your lockfile for known malicious npm packages (DataDog keyv campaign, Shai-Hulud, axios supply-chain, TeamPCP, OSV MAL advisories).",
+  "type": "module",
+  "bin": {
+    "npm-scan": "bin/npm-scan.js"
+  },
+  "files": [
+    "bin/",
+    "src/"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "scan": "node bin/npm-scan.js",
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "lint": "eslint bin src test scripts",
+    "coverage": "node scripts/check-coverage.mjs",
+    "check": "node --check bin/npm-scan.js && npm run lint && npm run coverage",
+    "prepublishOnly": "npm run check"
+  },
+  "keywords": [
+    "npm",
+    "security",
+    "malicious",
+    "supply-chain",
+    "lockfile",
+    "osv",
+    "scanner"
+  ],
+  "license": "MIT",
+  "author": "Kyle",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kyle/npm-scan.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kyle/npm-scan/issues"
+  },
+  "homepage": "https://github.com/kyle/npm-scan#readme",
+  "dependencies": {
+    "@inkjs/ui": "^2.0.0",
+    "fflate": "^0.8.3",
+    "gradient-string": "^3.0.0",
+    "ink": "^5.2.1",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.1",
+    "globals": "^17.11.0"
+  }
+}

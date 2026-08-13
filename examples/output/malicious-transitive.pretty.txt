@@ -1,0 +1,38 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ npm-scan v1.2.0  [ 1 malicious package ]                                     │
+│ ──────────────────────────────────────────────────────────────────────────── │
+│    Lockfile: package-lock.json                                               │
+│     Scanned: 2 packages   Indicators: 3,474 from 4 sources                   │
+│                                                                              │
+│ Findings ─────────────────────────────────────────────────────────────────── │
+│                                                                              │
+│ Package  Version  Detected by                  Advisory             Severity │
+│ ──────────────────────────────────────────────────────────────────────────── │
+│ keyv     6.0.0    DataDog keyv-campaign        MAL-2026-11524              — │
+│                                                                              │
+│ Details & links ──────────────────────────────────────────────────────────── │
+│                                                                              │
+│ ▸ keyv@6.0.0                                                                 │
+│    Dependency: Transitive via cacheable-request                              │
+│      Advisory: MAL-2026-11524 — Malicious code in keyv (npm)                 │
+│       Aliases: GHSA-3p9h-f68w-m6fx                                           │
+│     • https://api.osv.dev/v1/vulns/MAL-2026-11524                            │
+│     • https://www.npmjs.com/package/keyv/v/6.0.0                             │
+│     • https://socket.dev/blog/popular-npm-packages-in-the-keyv-and-cacheabl… │
+│     • https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-suppl… │
+│      Campaign: https://github.com/DataDog/indicators-of-compromise/tree/key… │
+│                                                                              │
+│ Recommended actions ──────────────────────────────────────────────────────── │
+│ 1. Update/pin each flagged package to a patched version listed in its        │
+│    advisory link above.                                                      │
+│ 2. Run `npm audit fix` then `npm install` to re-resolve the dependency tree. │
+│ 3. If a flagged package ran install scripts or executed code, treat the      │
+│    machine as compromised — rotate npm / GitHub / cloud credentials and      │
+│    review published packages and git history.                                │
+│ 4. Keep `package-lock.json` committed and review dependency changes in every │
+│    pull request.                                                             │
+│                                                                              │
+│ ──────────────────────────────────────────────────────────────────────────── │
+│ npm-scan 1.2.0 · 405ms · 2026-08-06T20:35:02.035Z                            │
+│ 4 sources · 3,474 indicators · all fresh                                     │
+╰──────────────────────────────────────────────────────────────────────────────╯

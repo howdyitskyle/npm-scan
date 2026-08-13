@@ -1,0 +1,62 @@
+name: Scan dependencies for malicious npm packages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint, coverage gate, and test suite
+        run: npm run check
+
+      - name: Run npm-scan (pretty)
+        run: node bin/npm-scan.js --format pretty --cache-dir "$RUNNER_TEMP/npm-scan-cache"
+
+      - name: Run npm-scan (SARIF)
+        id: sarif
+        continue-on-error: true
+        run: |
+          node bin/npm-scan.js --format sarif --cache-dir "$RUNNER_TEMP/npm-scan-cache" > scan.sarif
+        # exit 1 (matches found) is expected; we still upload results.
+
+      - name: Run npm-scan (GitHub annotations)
+        continue-on-error: true
+        run: |
+          node bin/npm-scan.js --format gh-annotations --cache-dir "$RUNNER_TEMP/npm-scan-cache"
+        # exit 1 (matches found) is expected; the ::error lines still annotate the PR.
+
+      - name: Upload SARIF to code scanning
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: scan.sarif
+        if: always() && steps.sarif.outcome != 'skipped'
+
+      - name: Feed integrity smoke (daily)
+        if: github.event_name == 'schedule'
+        run: |
+          set +e
+          OUT="$(node bin/npm-scan.js --lockfile test/fixtures/malicious-v3.json --no-osv --ttl 0 --format compact --cache-dir "$RUNNER_TEMP/npm-scan-smoke-cache" 2>&1)"
+          RC=$?
+          set -e
+          echo "$OUT"
+          [ "$RC" = "1" ] || { echo "FAIL: expected exit 1 (matches found), got $RC"; exit 1; }
+          echo "$OUT" | grep -q "keyv@6.0.0" || { echo "FAIL: keyv@6.0.0 not detected (feed drifted?)"; exit 1; }
+          echo "$OUT" | grep -q "axios@1.14.1" || { echo "FAIL: axios@1.14.1 not detected (feed drifted?)"; exit 1; }

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0.0",
+  "tool": {
+    "name": "npm-scan",
+    "version": "1.2.0",
+    "informationUri": "https://github.com/kyle/npm-scan"
+  },
+  "generatedAt": "2026-08-06T20:34:58.749Z",
+  "summary": {
+    "lockfile": "examples/lockfiles/clean/package-lock.json",
+    "lockfileFormat": "package-lock",
+    "scanned": 1,
+    "indicators": 3474,
+    "sources": 5,
+    "found": 0,
+    "durationMs": 3117,
+    "osvSkipped": false,
+    "staleSources": 0,
+    "warnings": []
+  },
+  "sources": [
+    {
+      "id": "keyv",
+      "label": "DataDog keyv-campaign",
+      "entries": 2236,
+      "fetchedAt": "2026-08-06T19:53:04.687Z",
+      "sha256": "75a8e8f324268f5f20bd3a68ebbd0843c4a7dd379c23d865b260c8101fe26107",
+      "skipped": false,
+      "stale": false
+    },
+    {
+      "id": "shai-hulud",
+      "label": "DataDog Shai-Hulud 2.0",
+      "entries": 1091,
+      "fetchedAt": "2026-08-06T19:53:04.710Z",
+      "sha256": "6e23c118af47e0282a735e6d35a11a7450e833b5891aaa24d1fa8cec231ddcc6",
+      "skipped": false,
+      "stale": false
+    },
+    {
+      "id": "axios",
+      "label": "DataDog axios compromise",
+      "entries": 3,
+      "fetchedAt": "2026-08-06T19:53:04.716Z",
+      "sha256": "9c9ddad95350c0295526d02c8063d717a786c36282970f691a192e9bdaa1d215",
+      "skipped": false,
+      "stale": false
+    },
+    {
+      "id": "teampcp",
+      "label": "DataDog TeamPCP",
+      "entries": 144,
+      "fetchedAt": "2026-08-06T19:53:04.687Z",
+      "sha256": "b7ab68715b11926f9e28495b99789da1ad1419a3a89c91b20faa21e5bfeca0df",
+      "skipped": false,
+      "stale": false
+    }
+  ],
+  "matches": []
+}
+

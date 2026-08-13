@@ -1,0 +1,49 @@
+{
+  "name": "test-app",
+  "version": "1.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "test-app",
+      "version": "1.0.0",
+      "dependencies": {
+        "keyv": "6.0.0",
+        "axios": "1.14.1",
+        "@accordproject/concerto-analysis": "3.24.1",
+        "@emilgroup/accounting-sdk": "1.27.3",
+        "lodash": "4.17.21"
+      }
+    },
+    "node_modules/keyv": {
+      "version": "6.0.0",
+      "resolved": "https://registry.npmjs.org/keyv/-/keyv-6.0.0.tgz",
+      "integrity": "sha512-fake0"
+    },
+    "node_modules/axios": {
+      "version": "1.14.1",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.14.1.tgz",
+      "integrity": "sha512-fake0"
+    },
+    "node_modules/@accordproject/concerto-analysis": {
+      "version": "3.24.1",
+      "resolved": "https://registry.npmjs.org/@accordproject/concerto-analysis/-/concerto-analysis-3.24.1.tgz",
+      "integrity": "sha512-fake0"
+    },
+    "node_modules/@emilgroup/accounting-sdk": {
+      "version": "1.27.3",
+      "resolved": "https://registry.npmjs.org/@emilgroup/accounting-sdk/-/accounting-sdk-1.27.3.tgz",
+      "integrity": "sha512-fake0"
+    },
+    "node_modules/lodash": {
+      "version": "4.17.21",
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",
+      "integrity": "sha512-fake0"
+    },
+    "node_modules/axios/node_modules/proxy-from-env": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/proxy-from-env/-/proxy-from-env-1.1.0.tgz",
+      "integrity": "sha512-fake0"
+    }
+  }
+}

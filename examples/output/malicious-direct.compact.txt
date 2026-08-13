@@ -1,0 +1,3 @@
+keyv@6.0.0: Direct dependency — detected by DataDog keyv-campaign (MAL-2026-11524)
+1 malicious package found
+

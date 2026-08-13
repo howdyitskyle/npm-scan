@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: npm-scan
+        name: npm-scan (malicious packages)
+        entry: npx --yes npm-scan --no-osv --format compact
+        language: system
+        files: package-lock.json|yarn.lock|pnpm-lock.yaml
+        pass_filenames: false
+        always_run: true

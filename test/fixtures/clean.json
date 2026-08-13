@@ -1,0 +1,26 @@
+{
+  "name": "clean-app",
+  "version": "1.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "clean-app",
+      "version": "1.0.0",
+      "dependencies": {
+        "lodash": "4.17.21",
+        "express": "4.19.2"
+      }
+    },
+    "node_modules/lodash": {
+      "version": "4.17.21",
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",
+      "integrity": "sha512-fake0"
+    },
+    "node_modules/express": {
+      "version": "4.19.2",
+      "resolved": "https://registry.npmjs.org/express/-/express-4.19.2.tgz",
+      "integrity": "sha512-fake0"
+    }
+  }
+}

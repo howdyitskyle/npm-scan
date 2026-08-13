@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "tool": {
+    "name": "npm-scan",
+    "version": "1.2.0",
+    "informationUri": "https://github.com/kyle/npm-scan"
+  },
+  "generatedAt": "2026-08-06T20:35:04.003Z",
+  "summary": {
+    "lockfile": "examples/lockfiles/malicious-transitive/package-lock.json",
+    "lockfileFormat": "package-lock",
+    "scanned": 2,
+    "indicators": 3474,
+    "sources": 5,
+    "found": 1,
+    "durationMs": 351,
+    "osvSkipped": false,
+    "staleSources": 0,
+    "warnings": []
+  },
+  "sources": [
+    {
+      "id": "keyv",
+      "label": "DataDog keyv-campaign",
+      "entries": 2236,
+      "fetchedAt": "2026-08-06T19:53:04.687Z",
+      "sha256": "75a8e8f324268f5f20bd3a68ebbd0843c4a7dd379c23d865b260c8101fe26107",
+      "skipped": false,
+      "stale": false
+    },
+    {
+      "id": "shai-hulud",
+      "label": "DataDog Shai-Hulud 2.0",
+      "entries": 1091,
+      "fetchedAt": "2026-08-06T19:53:04.710Z",
+      "sha256": "6e23c118af47e0282a735e6d35a11a7450e833b5891aaa24d1fa8cec231ddcc6",
+      "skipped": false,
+      "stale": false
+    },
+    {
+      "id": "axios",
+      "label": "DataDog axios compromise",
+      "entries": 3,
+      "fetchedAt": "2026-08-06T19:53:04.716Z",
+      "sha256": "9c9ddad95350c0295526d02c8063d717a786c36282970f691a192e9bdaa1d215",
+      "skipped": false,
+      "stale": false
+    },
+    {
+      "id": "teampcp",
+      "label": "DataDog TeamPCP",
+      "entries": 144,
+      "fetchedAt": "2026-08-06T19:53:04.687Z",
+      "sha256": "b7ab68715b11926f9e28495b99789da1ad1419a3a89c91b20faa21e5bfeca0df",
+      "skipped": false,
+      "stale": false
+    }
+  ],
+  "matches": [
+    {
+      "name": "keyv",
+      "version": "6.0.0",
+      "entry": {
+        "sources": [
+          "DataDog keyv-campaign"
+        ],
+        "osv": [
+          "MAL-2026-11524"
+        ]
+      },
+      "direct": false,
+      "via": [
+        "cacheable-request"
+      ],
+      "advisories": [
+        {
+          "id": "MAL-2026-11524",
+          "summary": "Malicious code in keyv (npm)",
+          "details": "npm/keyv version 6.0.0 is a trojanized release published on 2026-08-04 during the compromise of the npm/GitHub maintainer account behind the keyv and cacheable package families (user \"Jaredwray\"). Attackers pushed the malicious payload to the source repository and cut releases through GitHub Actions, so the poisoned versions reached npm with a valid, signed provenance attestation (provenance attests build integrity, not source integrity). Delivery is through the npm install lifecycle: the trojanized package.json adds a preinstall hook (`\"preinstall\": \"node setup.mjs\"`) that runs before any project code on a bare `npm install`, while the normal compiled output is left intact so the package still works after install. setup.mjs downloads a standalone Bun runtime and uses it to run a second stage (shipped as Math_Symbol.js, a heavily obfuscated ~728 KB Bun bundle, referenced at runtime as math_init.js). The stealer harvests credentials from cloud instance metadata (AWS IMDS at 169.254.169.254, ECS at 169.254.170.2, GCP, Azure), AWS/GCP/Azure keys, HashiCorp Vault tokens, Kubernetes service-account tokens, GitHub Actions OIDC and org/repo secrets, and npm tokens, with a TruffleHog-style regex sweep for further secrets and private keys. Using the stolen npm identity (including npm OIDC trusted publishing) it enumerates and republishes further packages the token can reach — which, for a maintainer controlling both keyv and cacheable, gave the worm a large blast radius. Stolen findings are exfiltrated to attacker-created GitHub repositories (descriptions reading \"Shai-Hulud: Here We Go Again\") and to destinations resolved over DNS, and autostart hooks are planted in the repository's .claude/ and .vscode/ configuration to run the loader when a developer or AI coding agent opens a clone. Treat any environment that installed this version (with install scripts enabled) as fully compromised and rotate every reachable credential. Part of the August 2026 npm worm that poisoned 400+ packages across many organizations.\n\n---\n_-= Per source details. Do not edit below this line.=-_\n\n## Source: amazon-inspector (4b828a8383aadd40e3c94c5be32dc4466e0d7c4872550f6316da2a195e978ca5)\nkeyv@6.0.0 is a lookalike of the popular keyv key-value package but ships an attack chain absent from the real library. The package.json preinstall hook runs a heavily obfuscated setup.mjs whose strings (URLs, shell commands, platform tokens, payload filename) are all reconstructed at runtime via a rotated string-array plus RC4-style decoder. On install, setup.mjs reassembles a GitHub-releases URL for a platform-specific Bun runtime archive (bun-linux-*, bun-darwin-*, bun-windows-*), downloads it, extracts it via PowerShell Expand-Archive or unzip, chmod+x's the resulting binary, and then uses execFileSync to invoke the shipped Math_Symbol.js under that dropped Bun runtime. Math_Symbol.js is a ~727 KB Bun-compiled bundle (// @bun @bun-cjs prelude) with obfuscated identifiers and a large constant table; it is not referenced by dist/index.mjs and only ever runs under the alien Bun runtime dropped at install. The library's advertised key-value storage has no need for a second language runtime or a hidden compiled bundle. Installing this package causes attacker-controlled code to execute on the installer's machine automatically via the npm preinstall lifecycle, using an alien-runtime dispatch that evades scanners inspecting only Node-resolved code.\n\n## Source: ghsa-malware (48375bb2643bebbc43e5fd4ee45e9810e9fe77bf95e434aeafbc22d63ab577e6)\nAny computer that has this package installed or running should be considered fully compromised. All secrets and keys stored on that computer should be rotated immediately from a different computer. The package should be removed, but as full control of the computer may have been given to an outside entity, there is no guarantee that removing the package will remove all malicious software resulting from installing it.\n",
+          "links": [
+            "https://api.osv.dev/v1/vulns/MAL-2026-11524",
+            "https://www.npmjs.com/package/keyv/v/6.0.0",
+            "https://socket.dev/blog/popular-npm-packages-in-the-keyv-and-cacheable-namespaces-compromised-in-active-supply-chain",
+            "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+          ],
+          "severity": null,
+          "affected": [],
+          "patched": null,
+          "aliases": [
+            "GHSA-3p9h-f68w-m6fx"
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "https://github.com/DataDog/indicators-of-compromise/tree/keyv-campaign/keyv-campaign"
+      ]
+    }
+  ]
+}
+
