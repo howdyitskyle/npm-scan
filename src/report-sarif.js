@@ -45,7 +45,7 @@ export function toSarif(report) {
           driver: {
             name: 'npm-scan',
             version: VERSION,
-            informationUri: 'https://github.com/kyle/npm-scan',
+            informationUri: 'https://github.com/howdyitskyle/npm-scan',
             rules: [
               {
                 id: 'npm-scan/malicious-package',

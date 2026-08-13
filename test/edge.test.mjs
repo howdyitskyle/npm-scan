@@ -20,7 +20,7 @@ async function tempDir() {
 function reportFixture(overrides = {}) {
   return {
     schemaVersion: '1.0.0',
-    tool: { name: 'npm-scan', version: '1.0.0', informationUri: 'https://github.com/kyle/npm-scan' },
+    tool: { name: 'npm-scan', version: '1.0.0', informationUri: 'https://github.com/howdyitskyle/npm-scan' },
     generatedAt: '2026-01-01T00:00:00.000Z',
     summary: {
       lockfile: 'package-lock.json',

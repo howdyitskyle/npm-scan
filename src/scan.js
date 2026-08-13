@@ -332,7 +332,7 @@ export async function runScan(opts, netOpts, { emit, log, warn, cwd, displayPath
 
   const report = {
     schemaVersion: '1.0.0',
-    tool: { name: 'npm-scan', version: VERSION, informationUri: 'https://github.com/kyle/npm-scan' },
+    tool: { name: 'npm-scan', version: VERSION, informationUri: 'https://github.com/howdyitskyle/npm-scan' },
     generatedAt: new Date().toISOString(),
     summary: {
       lockfile: displayPath,

@@ -34,12 +34,12 @@
   "author": "Kyle",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kyle/npm-scan.git"
+    "url": "https://github.com/howdyitskyle/npm-scan.git"
   },
   "bugs": {
-    "url": "https://github.com/kyle/npm-scan/issues"
+    "url": "https://github.com/howdyitskyle/npm-scan/issues"
   },
-  "homepage": "https://github.com/kyle/npm-scan#readme",
+  "homepage": "https://github.com/howdyitskyle/npm-scan#readme",
   "dependencies": {
     "@inkjs/ui": "^2.0.0",
     "fflate": "^0.8.3",
