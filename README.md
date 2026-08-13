@@ -14,6 +14,10 @@ known malicious npm packages, and reports anything it finds with rich detail
 — including whether the package is a direct or transitive dependency and
 which of your direct dependencies pulled it in.
 
+![npm-scan in action](docs/screenshot.png)
+
+*The interactive scan and `pretty` report flagging a malicious package.*
+
 ## Contents
 
 - [Features](#features)
