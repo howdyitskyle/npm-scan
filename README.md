@@ -1,5 +1,9 @@
 # npm-scan
 
+[![CI](https://github.com/howdyitskyle/npm-scan/actions/workflows/scan.yml/badge.svg)](https://github.com/howdyitskyle/npm-scan/actions/workflows/scan.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20.19.0-brightgreen.svg)](https://nodejs.org/)
+
 Detect known malicious npm packages in your lock files.
 
 `npm-scan` scans `package-lock.json` (v1/v2/v3), `yarn.lock` (v1), `pnpm-lock.yaml`
