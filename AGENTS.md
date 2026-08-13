@@ -95,3 +95,7 @@ merely "<100%"), so adding an untested module breaks `npm run check`.
   `package.json` `name` must use the scoped name.
 - Repo is on GitHub at `howdyitskyle/npm-scan` (CI green via
   `.github/workflows/scan.yml`); do not commit or push unless asked.
+- `main` is branch-protected: it requires a pull request and the `scan` status
+  check to pass. Never push directly to `main`. The workflow for any change is
+  a feature branch, push it, open a PR (`gh pr create`), and merge once the
+  `scan` check is green (`gh pr merge`).
