@@ -542,7 +542,7 @@ test('renderReport: sarif includes endTimeUtc and match metadata', () => {
   });
   const sarif = JSON.parse(renderReport(report, { format: 'sarif' }));
   const run = sarif.runs[0];
-  assert.equal(run.invocation.endTimeUtc, '2026-01-01T00:00:00.000Z');
+  assert.equal(run.invocations[0].endTimeUtc, '2026-01-01T00:00:00.000Z');
   assert.equal(run.results.length, 1);
   assert.deepEqual(run.results[0].properties.sources, ['DataDog keyv-campaign']);
   assert.equal(run.results[0].properties.advisories[0].patched, '6.0.1');

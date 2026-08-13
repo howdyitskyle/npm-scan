@@ -58,13 +58,15 @@ export function toSarif(report) {
           },
         },
         results,
-        invocation: {
-          executionSuccessful: true,
-          endTimeUtc: report.generatedAt,
-          properties: {
-            staleSources: summary.staleSources,
+        invocations: [
+          {
+            executionSuccessful: true,
+            endTimeUtc: report.generatedAt,
+            properties: {
+              staleSources: summary.staleSources,
+            },
           },
-        },
+        ],
       },
     ],
   };

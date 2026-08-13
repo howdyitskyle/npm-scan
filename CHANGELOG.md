@@ -112,6 +112,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `scripts/check-coverage.mjs` now parses both the Node 20 (`#`) and Node 22+
   (`ℹ`) test-coverage report formats, so the coverage gate no longer fails on
   newer Node versions.
+- SARIF output now uses the schema-valid `invocations` array (was a bare
+  `invocation` object, which the SARIF 2.1.0 schema rejects), so uploads to
+  GitHub code scanning succeed.
 
 ## [1.2.0] - 2026-08-06
 
