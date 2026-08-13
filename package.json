@@ -1,5 +1,5 @@
 {
-  "name": "npm-scan",
+  "name": "@howdyitskyle/npm-scan",
   "version": "1.2.0",
   "description": "Scan your lockfile for known malicious npm packages (DataDog keyv campaign, Shai-Hulud, axios supply-chain, TeamPCP, OSV MAL advisories).",
   "type": "module",

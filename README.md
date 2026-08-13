@@ -1,6 +1,7 @@
 # npm-scan
 
 [![CI](https://github.com/howdyitskyle/npm-scan/actions/workflows/scan.yml/badge.svg)](https://github.com/howdyitskyle/npm-scan/actions/workflows/scan.yml)
+[![npm version](https://img.shields.io/npm/v/@howdyitskyle/npm-scan)](https://www.npmjs.com/package/@howdyitskyle/npm-scan)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20.19.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -15,12 +16,16 @@ which of your direct dependencies pulled it in.
 ## Quick start
 
 ```sh
-npx --yes npm-scan
+npx --yes @howdyitskyle/npm-scan
 ```
 
 Auto-detects a lock file in the current directory, scans it, and prints a
 report. Exit code is `1` when anything is found, so it drops straight into
-CI and pre-commit hooks.
+CI and pre-commit hooks. Install it globally to get the `npm-scan` command:
+
+```sh
+npm install -g @howdyitskyle/npm-scan
+```
 
 ```sh
 # Scan a specific lock file, JSON output
@@ -136,7 +141,7 @@ annotations on the lock file in the PR diff. A minimal job:
 
 ```yaml
 - uses: actions/checkout@v4
-- run: npx --yes npm-scan --format gh-annotations
+- run: npx --yes @howdyitskyle/npm-scan --format gh-annotations
 ```
 
 For the check to fail when malware is found, let the exit code propagate (it is
@@ -219,7 +224,7 @@ flags the source as stale in the report.
 GitHub Actions workflow at `.github/workflows/scan.yml` runs the test suite,
 scans with `pretty`, `sarif`, and `gh-annotations` output, uploads SARIF to
 code scanning, and runs a daily feed-integrity smoke test. A local pre-commit
-hook at `.pre-commit-config.yaml` runs `npm-scan --no-osv --format compact` on
+hook at `.pre-commit-config.yaml` runs `npx --yes @howdyitskyle/npm-scan --no-osv --format compact` on
 lock file changes.
 
 ## Options

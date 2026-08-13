@@ -88,4 +88,10 @@ merely "<100%"), so adding an untested module breaks `npm run check`.
   `test/fixtures/malicious-v3.json` output for `keyv@6.0.0` and `axios@1.14.1`;
   don't change those fixture packages without updating the workflow. It only
   runs on `schedule`, so `npm run check` won't catch a break.
-- Repo has no commits yet (branch `main`); do not commit unless asked.
+- The npm package is published as the scoped `@howdyitskyle/npm-scan`. The
+  unscoped name `npm-scan` is rejected by the npm registry as too similar to
+  the existing `npmscan` package. The CLI binary is still `npm-scan`; publish
+  with `npm publish --access=public`. README's `npx`/pre-commit examples and
+  `package.json` `name` must use the scoped name.
+- Repo is on GitHub at `howdyitskyle/npm-scan` (CI green via
+  `.github/workflows/scan.yml`); do not commit or push unless asked.

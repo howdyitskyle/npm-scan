@@ -39,6 +39,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Package renamed to the scoped `@howdyitskyle/npm-scan` (the unscoped
+  `npm-scan` name is rejected by npm as too similar to the existing `npmscan`
+  package). The CLI binary is still `npm-scan`; publish with
+  `npm publish --access=public`.
 - License switched from Apache-2.0 to MIT.
 - Internal source layout: `src/cli.js` now only wires the CLI — the scan
   orchestration moved to `src/scan.js`, `--exclude-pkg` rule parsing to
