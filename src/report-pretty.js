@@ -143,7 +143,7 @@ export function renderPretty(report, { verbose = false } = {}) {
     push(`${green('\u2714')} ${bold(green('No known malicious packages found'))} \u2014 your lock file looks clean.`);
     push('');
     push(rule());
-    for (const line of footerLines(report, verbose)) push(line);
+    for (const line of footerLines(report, verbose, contentW)) push(line);
     return wrapFrame(L.join('\n'), cols);
   }
 
@@ -253,6 +253,7 @@ export function renderPretty(report, { verbose = false } = {}) {
   }
 
   push(bandLine('Recommended actions'));
+  push('');
   const actions = [
     `${bold('Update/pin')} each flagged package to a patched version listed in its advisory link above.`,
     `Run ${bold('`npm audit fix`')} then ${bold('`npm install`')} to re-resolve the dependency tree.`,
@@ -267,14 +268,14 @@ export function renderPretty(report, { verbose = false } = {}) {
   });
   push('');
   push(rule());
-  for (const line of footerLines(report, verbose)) push(line);
+  for (const line of footerLines(report, verbose, contentW)) push(line);
   return wrapFrame(L.join('\n'), cols);
 }
 
-function footerLines(report, verbose = false) {
+function footerLines(report, verbose = false, width = 0) {
   const { summary, sources, generatedAt } = report;
   const L = [];
-  L.push(`${wordmark()} ${VERSION} ${dim('\u00b7')} ${summary.durationMs}ms ${dim('\u00b7')} ${generatedAt}`);
+  const left = `${wordmark()} ${VERSION} ${dim('\u00b7')} ${summary.durationMs}ms ${dim('\u00b7')} ${generatedAt}`;
   if (!verbose) {
     const total = sources.reduce((sum, s) => sum + (s.entries || 0), 0);
     const skipped = sources.filter((s) => s.skipped).length;
@@ -283,9 +284,12 @@ function footerLines(report, verbose = false) {
     if (skipped > 0) parts.push(red(`skipped: ${plural(skipped, 'source')}`));
     if (stale > 0) parts.push(yellow(`stale: ${plural(stale, 'source')}`));
     if (skipped === 0 && stale === 0) parts.push(dim('all fresh'));
-    L.push(parts.join(' \u00b7 '));
+    const right = parts.join(' \u00b7 ');
+    const pad = Math.max(1, width - stripAnsi(left).length - stripAnsi(right).length);
+    L.push(`${left}${' '.repeat(pad)}${right}`);
     return L;
   }
+  L.push(left);
   for (const s of sources) {
     const status = s.skipped
       ? red(`skipped (${s.error})`)

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Pretty report: the `Recommended actions` section now has the same blank line
+  after its heading as the other sections, and the footer digest
+  (`N sources · M indicators · all fresh`) is right-aligned on the same line as
+  the wordmark/version/timestamp.
+
 ## [1.2.1] - 2026-08-13
 
 ### Added
