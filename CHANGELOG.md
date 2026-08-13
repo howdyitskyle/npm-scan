@@ -44,6 +44,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   package). The CLI binary is still `npm-scan`; publish with
   `npm publish --access=public`.
 - License switched from Apache-2.0 to MIT.
+- GitHub Actions workflow updated to `actions/checkout@v7`,
+  `actions/setup-node@v7`, and `codeql-action/upload-sarif@v4` (the prior
+  v4/v3 majors target the deprecated Node 20 runner).
 - Internal source layout: `src/cli.js` now only wires the CLI — the scan
   orchestration moved to `src/scan.js`, `--exclude-pkg` rule parsing to
   `src/exclude.js`, `ScanError` to `src/errors.js`, and the package version to

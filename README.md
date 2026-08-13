@@ -182,7 +182,7 @@ excluded, the run exits `0`. A missing or malformed file exits `2`.
 annotations on the lock file in the PR diff. A minimal job:
 
 ```yaml
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - run: npx --yes @howdyitskyle/npm-scan --format gh-annotations
 ```
 
