@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process';
 import { readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { join } from 'node:path';
+import { basename, join } from 'node:path';
 
 const testDir = fileURLToPath(new URL('../test/', import.meta.url));
 const srcDir = fileURLToPath(new URL('../src/', import.meta.url));
@@ -26,12 +26,13 @@ let failed = false;
 const rows = [];
 for (const line of output.split('\n')) {
   const m = line.match(/^(?:#|\u2139)\s+(\S+)\s+\|\s+([\d.]+)\s+\|/);
-  if (!m || !srcFiles.has(m[1])) continue;
-  seen.add(m[1]);
-  rows.push([m[1], m[2]]);
+  const name = m ? basename(m[1]) : null;
+  if (!name || !srcFiles.has(name)) continue;
+  seen.add(name);
+  rows.push([name, m[2]]);
   if (m[2] !== '100.00') {
     failed = true;
-    process.stderr.write(`FAIL: ${m[1]} is at ${m[2]}% line coverage (target 100.00%)\n`);
+    process.stderr.write(`FAIL: ${name} is at ${m[2]}% line coverage (target 100.00%)\n`);
   }
 }
 

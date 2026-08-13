@@ -133,15 +133,17 @@ function scanOpts(overrides = {}) {
 
 test('isTuiEligible: requires TTY, pretty format, no --no-tui, no CI, sane TERM', () => {
   const opts = scanOpts();
-  assert.equal(isTuiEligible({ stdout: capture(true), opts }), true);
-  assert.equal(isTuiEligible({ stdout: capture(false), opts }), false, 'non-TTY stdout must be ineligible');
-  assert.equal(isTuiEligible({ stdout: null, opts }), false);
-  assert.equal(isTuiEligible({ stdout: capture(true), opts: scanOpts({ format: 'json' }) }), false);
-  assert.equal(isTuiEligible({ stdout: capture(true), opts: scanOpts({ noTui: true }) }), false);
-
   const savedCi = process.env.CI;
   const savedTerm = process.env.TERM;
   try {
+    delete process.env.CI;
+    delete process.env.TERM;
+    assert.equal(isTuiEligible({ stdout: capture(true), opts }), true);
+    assert.equal(isTuiEligible({ stdout: capture(false), opts }), false, 'non-TTY stdout must be ineligible');
+    assert.equal(isTuiEligible({ stdout: null, opts }), false);
+    assert.equal(isTuiEligible({ stdout: capture(true), opts: scanOpts({ format: 'json' }) }), false);
+    assert.equal(isTuiEligible({ stdout: capture(true), opts: scanOpts({ noTui: true }) }), false);
+
     process.env.CI = 'true';
     assert.equal(isTuiEligible({ stdout: capture(true), opts }), false, 'CI must disable the TUI');
     delete process.env.CI;
