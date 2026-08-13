@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.2] - 2026-08-13
+
 ### Added
 
 - `--init-config`: writes a `.npmscanrc.json` (or the `--config` path) pre-filled
