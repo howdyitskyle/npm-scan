@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/howdyitskyle/npm-scan/actions/workflows/scan.yml/badge.svg)](https://github.com/howdyitskyle/npm-scan/actions/workflows/scan.yml)
 [![npm version](https://img.shields.io/npm/v/@howdyitskyle/npm-scan)](https://www.npmjs.com/package/@howdyitskyle/npm-scan)
+[![npm downloads](https://img.shields.io/npm/dm/@howdyitskyle/npm-scan)](https://www.npmjs.com/package/@howdyitskyle/npm-scan)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20.19.0-brightgreen.svg)](https://nodejs.org/)
 
